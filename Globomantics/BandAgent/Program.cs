@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Globomantics.BandAgent.Commands;
 using Microsoft.Azure.Devices.Client;
-using Microsoft.Azure.Devices.Shared;
-using Microsoft.Data.Edm.Csdl;
 using Newtonsoft.Json;
 
 namespace Globomantics.BandAgent
@@ -12,8 +12,8 @@ namespace Globomantics.BandAgent
     {
         private static async Task Main(string[] args)
         {
-            var connectionString = "HostName=ps-iothub-fm.azure-devices.net;DeviceId=device1;SharedAccessKey=ZJNtwonsWec64h0N0sXaW4jaml5CJ5JVCZMIO8S9erQ=";
-            var device = DeviceClient.CreateFromConnectionString(connectionString);
+            var device = await (new CreateDeviceCommand("HostName=ps-iothub-fm.azure-devices.net;DeviceId=device1;SharedAccessKey=ZJNtwonsWec64h0N0sXaW4jaml5CJ5JVCZMIO8S9erQ="))
+                .ExecuteAsync();
 
             Console.WriteLine("Initializing...");
 
@@ -21,19 +21,19 @@ namespace Globomantics.BandAgent
 
             Console.WriteLine("Device is connected.");
 
-            var twinCollection = new TwinCollection();
-            twinCollection["connectionType"] = "wi-fi";
-            twinCollection["connectionStrength"] = "weak";
+            var parameters = new Dictionary<string, object>
+            {
+                {"connectionType", "wi-fi"},
+                {"connectionStrength", "strong"}
+            };
 
-            await device.UpdateReportedPropertiesAsync(twinCollection);
-            
+            await (new UpdateReportedPropertiesTask(device)).ExecuteAsync(parameters);
+
             while (true)
             {
                 var obj = new {LuckyNumber = new Random().Next(100, 200), Ts = DateTime.UtcNow};
-                var payload = JsonConvert.SerializeObject(obj);
-                var message = new Message(Encoding.ASCII.GetBytes(payload));
 
-                await device.SendEventAsync(message);
+                await (new SendEventCommand(obj, device)).ExecuteAsync();
 
                 Console.WriteLine("Message sent.");
                 await Task.Delay(TimeSpan.FromSeconds(2));
