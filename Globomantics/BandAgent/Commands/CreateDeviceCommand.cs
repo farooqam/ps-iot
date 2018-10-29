@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Azure.Devices.Client;
 
 namespace Globomantics.BandAgent.Commands
 {
-    public class CreateDeviceCommand : ICommand<DeviceClient>
+    public class CreateDeviceCommand : ICommand<IDeviceClient>
     {
         private readonly string _connectionString;
+        private readonly IDeviceClientFactory _deviceClientFactory;
 
-        public CreateDeviceCommand(string connectionString)
+        public CreateDeviceCommand(string connectionString, IDeviceClientFactory deviceClientFactory)
         {
             _connectionString = connectionString;
+            _deviceClientFactory = deviceClientFactory;
         }
 
-        public Task<DeviceClient> ExecuteAsync(Dictionary<string, object> parameters = null)
+        public Task<IDeviceClient> ExecuteAsync(Dictionary<string, object> parameters = null)
         {
-            return Task.FromResult(DeviceClient.CreateFromConnectionString(_connectionString));
+            return Task.FromResult(_deviceClientFactory.CreateFromConnectionString(_connectionString));
         }
     }
 }
