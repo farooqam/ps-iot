@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
+using Microsoft.Azure.Devices.Shared;
 using Microsoft.Data.Edm.Csdl;
 using Newtonsoft.Json;
 
@@ -19,6 +20,12 @@ namespace Globomantics.BandAgent
             await device.OpenAsync();
 
             Console.WriteLine("Device is connected.");
+
+            var twinCollection = new TwinCollection();
+            twinCollection["connectionType"] = "wi-fi";
+            twinCollection["connectionStrength"] = "weak";
+
+            await device.UpdateReportedPropertiesAsync(twinCollection);
             
             while (true)
             {
