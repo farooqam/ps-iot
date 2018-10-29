@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Data.Edm.Csdl;
+using Newtonsoft.Json;
 
 namespace Globomantics.BandAgent
 {
@@ -17,8 +19,18 @@ namespace Globomantics.BandAgent
             await device.OpenAsync();
 
             Console.WriteLine("Device is connected.");
-            Console.WriteLine("Press a key to exit.");
-            Console.ReadKey();
+            
+            while (true)
+            {
+                var obj = new {LuckyNumber = new Random().Next(100, 200), Ts = DateTime.UtcNow};
+                var payload = JsonConvert.SerializeObject(obj);
+                var message = new Message(Encoding.ASCII.GetBytes(payload));
+
+                await device.SendEventAsync(message);
+
+                Console.WriteLine("Message sent.");
+                await Task.Delay(TimeSpan.FromSeconds(2));
+            }
         }
     }
 }
