@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BandAgent.Tests", "BandAgen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventProcessor", "EventProcessor\EventProcessor.csproj", "{212284B7-2B90-45B8-8318-8125A84AAEA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventProcessor.Tests", "EventProcessor.Tests\EventProcessor.Tests.csproj", "{2CCEE16F-663C-4F6E-B3FC-ABD9CC857179}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{212284B7-2B90-45B8-8318-8125A84AAEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{212284B7-2B90-45B8-8318-8125A84AAEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{212284B7-2B90-45B8-8318-8125A84AAEA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CCEE16F-663C-4F6E-B3FC-ABD9CC857179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CCEE16F-663C-4F6E-B3FC-ABD9CC857179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CCEE16F-663C-4F6E-B3FC-ABD9CC857179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CCEE16F-663C-4F6E-B3FC-ABD9CC857179}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

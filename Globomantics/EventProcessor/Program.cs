@@ -4,7 +4,7 @@ using Microsoft.Azure.EventHubs;
 
 namespace Globomantics.EventProcessor
 {
-    class EventProcessorHost
+    class Program
     {
         static async Task Main(string[] args)
         {
@@ -21,7 +21,7 @@ namespace Globomantics.EventProcessor
                 storageConnectionString,
                 leaseContainerName);
 
-            await processor.RegisterEventProcessorAsync<LoggingEventProcessor>();
+            await processor.RegisterEventProcessorFactoryAsync(new EventProcessorFactory());
 
             Console.WriteLine("Event processor started. Press a key to exit.");
             Console.ReadKey();
