@@ -2,7 +2,7 @@
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Shared;
 
-namespace Globomantics.BandAgent.Commands
+namespace Globomantics.BandAgent
 {
     public interface IDeviceClient
     {

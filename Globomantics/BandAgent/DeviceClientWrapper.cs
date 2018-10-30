@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Globomantics.BandAgent.Commands;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Shared;
 

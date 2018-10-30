@@ -1,6 +1,4 @@
-﻿using Globomantics.BandAgent.Commands;
-
-namespace Globomantics.BandAgent
+﻿namespace Globomantics.BandAgent
 {
     public class DeviceClientFactory : IDeviceClientFactory
     {

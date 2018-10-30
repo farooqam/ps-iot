@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Globomantics.BandAgent.Commands;
+// ReSharper disable StringLiteralTypo
 
 namespace Globomantics.BandAgent
 {
@@ -10,7 +11,7 @@ namespace Globomantics.BandAgent
         private static async Task Main()
         {
             Console.WriteLine("Initializing...");
-
+            
             var connectionString = "HostName=ps-iothub-fm.azure-devices.net;DeviceId=device1;SharedAccessKey=ZJNtwonsWec64h0N0sXaW4jaml5CJ5JVCZMIO8S9erQ=";
             var deviceClientFactory = new DeviceClientFactory(connectionString);
             var createDeviceCommand = new CreateDeviceCommand(deviceClientFactory);
@@ -44,6 +45,7 @@ namespace Globomantics.BandAgent
                 Console.WriteLine("Message sent.");
                 await Task.Delay(TimeSpan.FromSeconds(2));
             }
+            // ReSharper disable once FunctionNeverReturns
         }
     }
 }
