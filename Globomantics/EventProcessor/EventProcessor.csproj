@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Globomantics.EventProcessor</AssemblyName>
+    <RootNamespace>Globomantics.EventProcessor</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.EventHubs" Version="2.2.1" />
+    <PackageReference Include="Microsoft.Azure.EventHubs.Processor" Version="2.2.1" />
+  </ItemGroup>
+
+</Project>
