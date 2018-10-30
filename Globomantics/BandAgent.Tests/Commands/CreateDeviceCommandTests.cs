@@ -13,7 +13,8 @@ namespace Globomantics.BandAgent.Tests.Commands
         {
             // Arrange
             Mock<IDeviceClientFactory> deviceClientFactoryMock = new Mock<IDeviceClientFactory>();
-            deviceClientFactoryMock.Setup(m => m.CreateDeviceClient()).Returns(new Mock<IDeviceClient>().Object);
+            var expectedDeviceClient = new Mock<IDeviceClient>().Object;
+            deviceClientFactoryMock.Setup(m => m.CreateDeviceClient()).Returns(expectedDeviceClient);
 
             var command = new CreateDeviceCommand(deviceClientFactoryMock.Object);
             
@@ -21,7 +22,7 @@ namespace Globomantics.BandAgent.Tests.Commands
             var deviceClient = await command.ExecuteAsync();
 
             // Assert
-            deviceClient.Should().NotBeNull();
+            deviceClient.Should().Be(expectedDeviceClient);
         }
     }
 }
