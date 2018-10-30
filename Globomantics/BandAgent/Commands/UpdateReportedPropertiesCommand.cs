@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Shared;
 
 namespace Globomantics.BandAgent.Commands
 {
-    public class UpdateReportedPropertiesTask : ICommand<TwinCollection>
+    public class UpdateReportedPropertiesCommand : ICommand<TwinCollection>
     {
-        private readonly DeviceClient _deviceClient;
+        private readonly IDeviceClient _deviceClient;
 
-        public UpdateReportedPropertiesTask(DeviceClient deviceClient)
+        public UpdateReportedPropertiesCommand(IDeviceClient deviceClient)
         {
             _deviceClient = deviceClient;
         }
