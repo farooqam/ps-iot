@@ -6,7 +6,7 @@ using Microsoft.Azure.Devices.Shared;
 using Moq;
 using Xunit;
 
-namespace Globomantics.BandAgent.Tests
+namespace Globomantics.BandAgent.Tests.Commands
 {
     public class UpdateReportedPropertiesCommandTests
     {

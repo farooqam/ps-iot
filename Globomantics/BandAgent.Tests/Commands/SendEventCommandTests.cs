@@ -7,7 +7,7 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace Globomantics.BandAgent.Tests
+namespace Globomantics.BandAgent.Tests.Commands
 {
     public class SendEventCommandTests
     {

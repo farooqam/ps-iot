@@ -4,7 +4,7 @@ using Globomantics.BandAgent.Commands;
 using Moq;
 using Xunit;
 
-namespace Globomantics.BandAgent.Tests
+namespace Globomantics.BandAgent.Tests.Commands
 {
     public class CreateDeviceCommandTests
     {
