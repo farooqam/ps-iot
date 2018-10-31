@@ -2,7 +2,7 @@
 
 namespace Globomantics.EventProcessor.Abstractions
 {
-    public interface IEventProcessorHostController
+    public interface IEventProcessorWrapper
     {
         Task StartEventProcessorHostAsync();
         Task StopEventProcessorHostAsync();

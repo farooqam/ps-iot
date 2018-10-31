@@ -8,12 +8,12 @@ using Serilog;
 
 namespace Globomantics.EventProcessor
 {
-    public class EventProcessorModule : IEventProcessor
+    public class EventProcessorContainer : IEventProcessor
     {
         private readonly ILogger _logger;
         private readonly IEventProcessorPlugin _eventProcessorPlugin;
 
-        public EventProcessorModule(IEventProcessorPlugin eventProcessorPlugin, ILogger logger)
+        public EventProcessorContainer(IEventProcessorPlugin eventProcessorPlugin, ILogger logger)
         {
             _eventProcessorPlugin = eventProcessorPlugin;
             _logger = logger;

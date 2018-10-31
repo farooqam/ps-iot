@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Globomantics.EventProcessor;
+using Globomantics.EventProcessor.Plugins;
 using Microsoft.Azure.EventHubs;
 using Serilog;
 
@@ -28,7 +29,7 @@ namespace Globomantics.EventProcessorHostController.Executable
                     "DefaultEndpointsProtocol=https;AccountName=psiotfmstorage;AccountKey=1uSJY+Uw4jwSEX/DvCFXCXBfxFcFW190madsMGgBr62mh+Q5/VGdJzwo4+512WitehPm0KfTGzn3c/GNfhtbBg==;EndpointSuffix=core.windows.net"
             };
 
-            var eventProcessorHostController = new EventProcessor.EventProcessorHostController(
+            var eventProcessorHostController = new EventProcessorWrapper(
                 new LoggingEventProcessorFactory(Log.Logger, new DeviceEventDataReader()),
                 eventProcessorHostControllerSettings);
 

@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EventProcessorAbstractions\EventProcessorAbstractions.csproj" />
-    <ProjectReference Include="..\EventProcessorHostControllerExecutable\EventProcessorHostControllerExecutable.csproj" />
+    <ProjectReference Include="..\EventProcessor\EventProcessor.csproj" />
   </ItemGroup>
 
 </Project>

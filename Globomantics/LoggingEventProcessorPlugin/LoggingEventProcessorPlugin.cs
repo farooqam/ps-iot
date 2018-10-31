@@ -4,7 +4,7 @@ using Globomantics.EventProcessor.Abstractions;
 using Microsoft.Azure.EventHubs;
 using Serilog;
 
-namespace Globomantics.EventProcessor
+namespace Globomantics.EventProcessor.Plugins
 {
     public class LoggingEventProcessorPlugin : IEventProcessorPlugin
     {

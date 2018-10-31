@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Globomantics.EventProcessor.Plugins</AssemblyName>
+    <RootNamespace>Globomantics.EventProcessor.Plugins</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventProcessorAbstractions\EventProcessorAbstractions.csproj" />
+    <ProjectReference Include="..\EventProcessor\EventProcessor.csproj" />
+  </ItemGroup>
+
+</Project>

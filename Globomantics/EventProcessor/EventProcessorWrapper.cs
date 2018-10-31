@@ -4,12 +4,12 @@ using Microsoft.Azure.EventHubs.Processor;
 
 namespace Globomantics.EventProcessor
 {
-    public class EventProcessorHostController : IEventProcessorHostController
+    public class EventProcessorWrapper : IEventProcessorWrapper
     {
         private readonly IEventProcessorFactory _eventProcessorFactory;
         private readonly EventProcessorHost _processor;
 
-        public EventProcessorHostController(
+        public EventProcessorWrapper(
             IEventProcessorFactory eventProcessorFactory,
             EventProcessorHostControllerSettings settings)
         {

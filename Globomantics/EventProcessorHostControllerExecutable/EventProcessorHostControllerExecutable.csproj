@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EventProcessorAbstractions\EventProcessorAbstractions.csproj" />
     <ProjectReference Include="..\EventProcessor\EventProcessor.csproj" />
+    <ProjectReference Include="..\LoggingEventProcessorPlugin\LoggingEventProcessorPlugin.csproj" />
   </ItemGroup>
 
 </Project>

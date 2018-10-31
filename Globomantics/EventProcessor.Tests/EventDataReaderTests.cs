@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Globomantics.EventProcessorHostController.Executable;
 using Microsoft.Azure.EventHubs;
 using Xunit;
 
