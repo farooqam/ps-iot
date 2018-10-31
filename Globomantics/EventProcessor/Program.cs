@@ -13,26 +13,30 @@ namespace Globomantics.EventProcessor
                 .WriteTo.Console()
                 .CreateLogger();
 
-            var hubName = "iothub-ehub-ps-iothub-906112-75e83745be";
-            var iotHubConnectionString = "Endpoint=sb://ihsuprodbyres066dednamespace.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=Lwo24+ra9w40Lz2vTS7CBTWsHPhvnKnXf2xPei1AAng=";
-            var storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=psiotfmstorage;AccountKey=1uSJY+Uw4jwSEX/DvCFXCXBfxFcFW190madsMGgBr62mh+Q5/VGdJzwo4+512WitehPm0KfTGzn3c/GNfhtbBg==;EndpointSuffix=core.windows.net";
-            var leaseContainerName = "message-processor-host";
-            var consumerGroupName = PartitionReceiver.DefaultConsumerGroupName;
+            var eventProcessorHostControllerSettings = new EventProcessorHostControllerSettings
+            {
+                ConsumerGroupName = PartitionReceiver.DefaultConsumerGroupName,
+                EventHubConnectionString =
+                    "Endpoint=sb://ihsuprodbyres066dednamespace.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=Lwo24+ra9w40Lz2vTS7CBTWsHPhvnKnXf2xPei1AAng=",
+                EventHubName = "iothub-ehub-ps-iothub-906112-75e83745be",
+                LeaseContainerName = "message-processor-host",
+                StorageConnectionString =
+                    "DefaultEndpointsProtocol=https;AccountName=psiotfmstorage;AccountKey=1uSJY+Uw4jwSEX/DvCFXCXBfxFcFW190madsMGgBr62mh+Q5/VGdJzwo4+512WitehPm0KfTGzn3c/GNfhtbBg==;EndpointSuffix=core.windows.net"
+            };
 
-            var processor = new Microsoft.Azure.EventHubs.Processor.EventProcessorHost(
-                hubName,
-                consumerGroupName,
-                iotHubConnectionString,
-                storageConnectionString,
-                leaseContainerName);
+            var eventProcessorHostController = new EventProcessorHostController(
+                new EventProcessorFactory(Log.Logger),
+                eventProcessorHostControllerSettings);
 
-            await processor.RegisterEventProcessorFactoryAsync(new EventProcessorFactory(Log.Logger));
+            await eventProcessorHostController.StartEventProcessorHostAsync();
             
             Log.Logger.Information("Event processor started. Press ENTER to exit.");
             Console.ReadLine();
 
             Log.Logger.Information("Shutting down...");
-            await processor.UnregisterEventProcessorAsync();
+
+            await eventProcessorHostController.StopEventProcessorHostAsync();
+
             Log.Logger.Information("Event processor has shut down.");
 
         }
