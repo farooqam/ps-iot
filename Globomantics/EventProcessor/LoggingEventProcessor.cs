@@ -4,38 +4,40 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.EventHubs;
 using Microsoft.Azure.EventHubs.Processor;
+using Serilog;
 
 namespace Globomantics.EventProcessor
 {
     public class LoggingEventProcessor : IEventProcessor
     {
+        private readonly ILogger _logger;
+
+        public LoggingEventProcessor(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         public Task OpenAsync(PartitionContext context)
         {
-            Console.WriteLine("LoggingEventProcessor opened, processing partition: " +
-                              $"'{context.PartitionId}'");
-
+            _logger.Debug("LoggingEventProcessor opened, processing partition: {PartitionId}", context.PartitionId);
             return Task.CompletedTask;
         }
 
         public Task CloseAsync(PartitionContext context, CloseReason reason)
         {
-            Console.WriteLine("LoggingEventProcessor closing, partition: " +
-                              $"'{context.PartitionId}', reason: '{reason}'.");
-
+            _logger.Debug("LoggingEventProcessor closing, partition: {PartitionId}, reason: {Reason}", context.PartitionId, reason);
             return Task.CompletedTask;
         }
 
         public Task ProcessErrorAsync(PartitionContext context, Exception error)
         {
-            Console.WriteLine("LoggingEventProcessor error, partition: " +
-                              $"{context.PartitionId}, error: {error.Message}");
-
+            _logger.Error("LoggingEventProcessor error, partition: {PartitionId}, error: {Error}", context.PartitionId, error.Message);
             return Task.CompletedTask;
         }
 
         public Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
         {
-            Console.WriteLine($"Batch of events received on partition '{context.PartitionId}'.");
+            _logger.Debug("Batch of events received on partition: {PartitionId}", context.PartitionId);
 
             foreach (var eventData in messages)
             {
@@ -45,9 +47,10 @@ namespace Globomantics.EventProcessor
 
                 var deviceId = eventData.SystemProperties["iothub-connection-device-id"];
 
-                Console.WriteLine($"Message received on partition '{context.PartitionId}', " +
-                                  $"device ID: '{deviceId}', " +
-                                  $"payload: '{payload}'");
+                _logger.Information("Message received on partition {PartitionId}, device ID: {DeviceId}, payload: {Payload}",
+                    context.PartitionId,
+                    deviceId,
+                    payload);
 
                 //var telemetry = JsonConvert.DeserializeObject<Telemetry>(payload);
 
