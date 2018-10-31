@@ -2,7 +2,7 @@
 using Globomantics.EventProcessor.Abstractions;
 using Microsoft.Azure.EventHubs.Processor;
 
-namespace Globomantics.EventProcessorHostController.Executable
+namespace Globomantics.EventProcessor
 {
     public class EventProcessorHostController : IEventProcessorHostController
     {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Globomantics.EventProcessor;
 using Globomantics.EventProcessor.Abstractions;
 using Globomantics.EventProcessorHostController.Executable;
 using Microsoft.Azure.EventHubs;
@@ -10,7 +9,7 @@ using Serilog;
 using Xunit;
 using IPartitionContextData = Globomantics.EventProcessor.Abstractions.IPartitionContextData;
 
-namespace EventProcessor.Tests
+namespace Globomantics.EventProcessor.Tests
 {
     public class LoggingEventProcessorPluginTests
     {

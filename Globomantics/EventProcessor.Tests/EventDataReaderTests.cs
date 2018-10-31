@@ -1,10 +1,9 @@
 ﻿using FluentAssertions;
-using Globomantics.EventProcessor;
 using Globomantics.EventProcessorHostController.Executable;
 using Microsoft.Azure.EventHubs;
 using Xunit;
 
-namespace EventProcessor.Tests
+namespace Globomantics.EventProcessor.Tests
 {
     public class EventDataReaderTests
     {

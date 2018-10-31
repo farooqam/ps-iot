@@ -2,7 +2,7 @@
 using Microsoft.Azure.EventHubs.Processor;
 using Serilog;
 
-namespace Globomantics.EventProcessorHostController.Executable
+namespace Globomantics.EventProcessor
 {
     public class LoggingEventProcessorFactory : IEventProcessorFactory
     {
