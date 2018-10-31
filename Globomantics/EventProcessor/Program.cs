@@ -25,7 +25,7 @@ namespace Globomantics.EventProcessor
             };
 
             var eventProcessorHostController = new EventProcessorHostController(
-                new EventProcessorFactory(Log.Logger),
+                new LoggingEventProcessorFactory(Log.Logger, new DeviceEventDataReader()),
                 eventProcessorHostControllerSettings);
 
             await eventProcessorHostController.StartEventProcessorHostAsync();

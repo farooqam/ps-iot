@@ -11,10 +11,12 @@ namespace Globomantics.EventProcessor
     public class LoggingEventProcessor : IEventProcessor
     {
         private readonly ILogger _logger;
+        private readonly IDeviceEventDataReader _eventDataReader;
 
-        public LoggingEventProcessor(ILogger logger)
+        public LoggingEventProcessor(ILogger logger, IDeviceEventDataReader eventDataReader)
         {
             _logger = logger;
+            _eventDataReader = eventDataReader;
         }
 
         public Task OpenAsync(PartitionContext context)
@@ -41,12 +43,9 @@ namespace Globomantics.EventProcessor
 
             foreach (var eventData in messages)
             {
-                var payload = Encoding.ASCII.GetString(eventData.Body.Array,
-                    eventData.Body.Offset,
-                    eventData.Body.Count);
-
-                var deviceId = eventData.SystemProperties["iothub-connection-device-id"];
-
+                var payload = _eventDataReader.ReadPayload(eventData);
+                var deviceId = _eventDataReader.ReadDeviceId(eventData);
+                
                 _logger.Information("Message received on partition {PartitionId}, device ID: {DeviceId}, payload: {Payload}",
                     context.PartitionId,
                     deviceId,
