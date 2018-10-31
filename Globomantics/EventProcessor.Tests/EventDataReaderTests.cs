@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Globomantics.EventProcessor;
+using Globomantics.EventProcessorHostController.Executable;
 using Microsoft.Azure.EventHubs;
 using Xunit;
 
@@ -12,7 +13,7 @@ namespace EventProcessor.Tests
         {
             // Arrange
             var reader = new EventDataReader();
-            var eventData = new EventData(reader.DefaultEncoding.GetBytes("foo"));
+            var eventData = new EventData(EventDataReader.DefaultEncoding.GetBytes("foo"));
 
             // Act
             var payload = reader.ReadPayload(eventData);

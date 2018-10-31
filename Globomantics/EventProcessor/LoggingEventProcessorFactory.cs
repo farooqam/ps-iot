@@ -1,7 +1,8 @@
-﻿using Microsoft.Azure.EventHubs.Processor;
+﻿using Globomantics.EventProcessor.Abstractions;
+using Microsoft.Azure.EventHubs.Processor;
 using Serilog;
 
-namespace Globomantics.EventProcessor
+namespace Globomantics.EventProcessorHostController.Executable
 {
     public class LoggingEventProcessorFactory : IEventProcessorFactory
     {
@@ -16,7 +17,7 @@ namespace Globomantics.EventProcessor
 
         public IEventProcessor CreateEventProcessor(PartitionContext context)
         {
-            return new LoggingEventProcessor(_logger, _eventDataReader);
+            return new EventProcessorModule(new LoggingEventProcessorPlugin(_eventDataReader, _logger), _logger);
         }
     }
 }

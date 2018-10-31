@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.EventHubs;
 
-namespace Globomantics.EventProcessor
+namespace Globomantics.EventProcessor.Abstractions
 {
     public interface IDeviceEventDataReader : IEventDataReader
     {

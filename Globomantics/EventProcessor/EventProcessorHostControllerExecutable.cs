@@ -3,13 +3,16 @@ using System.Threading.Tasks;
 using Microsoft.Azure.EventHubs;
 using Serilog;
 
-namespace Globomantics.EventProcessor
+// ReSharper disable StringLiteralTypo
+
+namespace Globomantics.EventProcessorHostController.Executable
 {
-    class Program
+    class EventProcessorHostControllerExecutable
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
             Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
                 .WriteTo.Console()
                 .CreateLogger();
 

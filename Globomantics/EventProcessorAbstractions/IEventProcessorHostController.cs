@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Globomantics.EventProcessor
+namespace Globomantics.EventProcessor.Abstractions
 {
     public interface IEventProcessorHostController
     {

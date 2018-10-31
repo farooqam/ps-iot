@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using Globomantics.EventProcessor.Abstractions;
 using Microsoft.Azure.EventHubs;
 using Microsoft.Azure.EventHubs.Processor;
 using Serilog;
 
-namespace Globomantics.EventProcessor
+namespace Globomantics.EventProcessorHostController.Executable
 {
-    public class LoggingEventProcessor : IEventProcessor
+    public class EventProcessorModule : IEventProcessor
     {
         private readonly ILogger _logger;
-        private readonly IDeviceEventDataReader _eventDataReader;
+        private readonly IEventProcessorPlugin _eventProcessorPlugin;
 
-        public LoggingEventProcessor(ILogger logger, IDeviceEventDataReader eventDataReader)
+        public EventProcessorModule(IEventProcessorPlugin eventProcessorPlugin, ILogger logger)
         {
+            _eventProcessorPlugin = eventProcessorPlugin;
             _logger = logger;
-            _eventDataReader = eventDataReader;
         }
 
         public Task OpenAsync(PartitionContext context)
@@ -37,28 +37,16 @@ namespace Globomantics.EventProcessor
             return Task.CompletedTask;
         }
 
-        public Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
+        public async Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
         {
             _logger.Debug("Batch of events received on partition: {PartitionId}", context.PartitionId);
+            await _eventProcessorPlugin.ProcessEventsAsync((PartitionContextData) context, messages);
 
-            foreach (var eventData in messages)
+            if (_eventProcessorPlugin.ShouldCheckpoint)
             {
-                var payload = _eventDataReader.ReadPayload(eventData);
-                var deviceId = _eventDataReader.ReadDeviceId(eventData);
-                
-                _logger.Information("Message received on partition {PartitionId}, device ID: {DeviceId}, payload: {Payload}",
-                    context.PartitionId,
-                    deviceId,
-                    payload);
-
-                //var telemetry = JsonConvert.DeserializeObject<Telemetry>(payload);
-
-                //if (telemetry.Status == StatusType.Emergency)
-                //{
-                //    Console.WriteLine($"Guest requires emergency assistance! Device ID: {deviceId}");
-                //}
+                _logger.Debug("Checkpointing");
+                await context.CheckpointAsync();
             }
-            return context.CheckpointAsync();
         }
     }
 }

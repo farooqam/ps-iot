@@ -1,4 +1,4 @@
-﻿namespace Globomantics.EventProcessor
+﻿namespace Globomantics.EventProcessorHostController.Executable
 {
     public class EventProcessorHostControllerSettings
     {

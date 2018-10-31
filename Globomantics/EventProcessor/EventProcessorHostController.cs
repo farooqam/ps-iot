@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Globomantics.EventProcessor.Abstractions;
 using Microsoft.Azure.EventHubs.Processor;
 
-namespace Globomantics.EventProcessor
+namespace Globomantics.EventProcessorHostController.Executable
 {
     public class EventProcessorHostController : IEventProcessorHostController
     {
@@ -13,7 +14,7 @@ namespace Globomantics.EventProcessor
             EventProcessorHostControllerSettings settings)
         {
             _eventProcessorFactory = eventProcessorFactory;
-            _processor = new Microsoft.Azure.EventHubs.Processor.EventProcessorHost(
+            _processor = new EventProcessorHost(
                 settings.EventHubName,
                 settings.ConsumerGroupName,
                 settings.EventHubConnectionString,

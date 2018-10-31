@@ -1,11 +1,12 @@
 ﻿using System.Text;
+using Globomantics.EventProcessor.Abstractions;
 using Microsoft.Azure.EventHubs;
 
-namespace Globomantics.EventProcessor
+namespace Globomantics.EventProcessorHostController.Executable
 {
     public class EventDataReader : IEventDataReader
     {
-        public Encoding DefaultEncoding => Encoding.ASCII;
+        public static Encoding DefaultEncoding => Encoding.ASCII;
 
         public string ReadPayload(EventData eventData)
         {
